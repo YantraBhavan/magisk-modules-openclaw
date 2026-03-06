@@ -1,6 +1,0 @@
-id=build-essentials
-name=Build Essentials by Yantra Bhavan
-version=1.0.0
-versionCode=1
-author=Yantra Bhavan
-description=Lean C/C++ toolchain (clang, make, cmake) and Python 3.13 for Android aarch64.

@@ -1,6 +1,0 @@
-id=nodejs-v24
-name=Node.js v24 (LTS)
-version=24.13.2
-versionCode=24132
-author=Yantra Bhavan
-description=Natively compiled Node.js v24 for Android aarch64 (Bionic libc).

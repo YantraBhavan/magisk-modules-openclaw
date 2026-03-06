@@ -1,7 +1,0 @@
-#!/data/data/com.termux/files/usr/bin/bash
-if [ "$1" != "-cc1" ]; then
-"$(dirname $0)/g++" --target="aarch64-linux-android24" "$@"
-else
-# Target is already an argument.
-"$(dirname $0)/g++" "$@"
-fi

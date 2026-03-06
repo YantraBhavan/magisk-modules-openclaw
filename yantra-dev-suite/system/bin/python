@@ -1,0 +1,5 @@
+#!/system/bin/sh
+export LD_LIBRARY_PATH=/data/local/yantra/lib:$LD_LIBRARY_PATH
+export PYTHONHOME=/data/local/yantra
+export PYTHONPATH=/data/local/yantra/lib/python3.13
+exec /system/bin/linker64 /data/local/yantra/bin/python_real "$@"

@@ -1,0 +1,4 @@
+#!/system/bin/sh
+export LD_LIBRARY_PATH=/data/local/yantra/lib:$LD_LIBRARY_PATH
+export CMAKE_ROOT=/data/local/yantra/share/cmake-4.2
+exec /system/bin/linker64 /data/local/yantra/bin/cmake_real "$@"
