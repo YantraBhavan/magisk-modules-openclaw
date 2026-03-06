@@ -1,0 +1,1 @@
+#!/system/bin/sh\nexport LD_LIBRARY_PATH=/system/usr/lib/node:\$LD_LIBRARY_PATH\nexec /system/bin/node_real /system/usr/lib/node_modules/npm/bin/npm-cli.js \"\$@\"
