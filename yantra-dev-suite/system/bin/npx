@@ -1,3 +1,5 @@
 #!/system/bin/sh
+export HOME=/data/openclaw/home
+export NPM_CONFIG_PREFIX=/data/openclaw/npm-global
 export LD_LIBRARY_PATH=/data/local/yantra/lib:$LD_LIBRARY_PATH
 exec /system/bin/linker64 /data/local/yantra/bin/node_real /data/local/yantra/lib/node_modules/npm/bin/npx-cli.js "$@"

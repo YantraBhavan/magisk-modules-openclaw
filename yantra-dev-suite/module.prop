@@ -1,6 +1,6 @@
 id=yantra-dev
 name=Yantra Development Suite
-version=1.7.0
-versionCode=17
+version=1.9.0
+versionCode=25
 author=Yantra Bhavan
 description=Complete dev suite (Node, Python, C++) using safe-linker strategy.

@@ -9,29 +9,17 @@ To ensure compatibility with Android 15+ and prevent bootloops, the following st
    - **NEVER** put heavy libraries directly into `/system/lib64/` (this causes fatal bootloops).
    - **NEVER** use `/system/usr/lib/` (it is blocked by Android Linker Namespaces).
 
-2. **Direct Linker Invocation:** Wrapper scripts in `/system/bin/` must invoke the system linker directly:
+2. **User Data Isolation:** All user data (NPM cache, Python modules, Home) must reside in `/data/openclaw/`.
+
+3. **Direct Linker Invocation:** Wrapper scripts in `/system/bin/` must invoke the system linker directly:
    ```bash
    exec /system/bin/linker64 /data/local/yantra/bin/binary_real "$@"
    ```
-   This bypasses security namespace restrictions for tools like `python`, `clang`, and `cmake`.
+   This bypasses security namespace restrictions.
 
-3. **Wrappers:** `/system/bin/` should only contain tiny shell wrappers. No binaries should be placed here.
-
-## 📦 Build & Packaging
-1. **Large Files (>50MB):** Do NOT commit files larger than 50MB to Git. 
-   - `libLLVM.so` and `libclang-cpp.so` must be excluded via `.gitignore`.
-   - Use `build_zip.sh` to fetch these on-demand during the build process.
-
-2. **Permissions:** All binaries must have `755` permissions. Use `customize.sh` within the Magisk module to ensure these are applied to the `/data/local/yantra/` path during installation.
-
-3. **Unix Line Endings:** Ensure all wrapper scripts use actual Unix newlines (`
-`). Avoid literal escape characters in production files.
+4. **Permissions:** All folders in `/data/local/yantra` and `/data/openclaw` must have `777` (permissive) permissions to allow the `shell` user to install global packages.
 
 ## 🛠️ Tool-Specific Rules
-- **Node.js:** Call `node_real` directly from wrappers to avoid recursive loops.
-- **Python:** Always export `PYTHONHOME=/data/local/yantra` and `PYTHONPATH=/data/local/yantra/lib/python3.13` in the wrapper.
-- **CMake:** Always export `CMAKE_ROOT=/data/local/yantra/share/cmake-4.2`.
-- **Compilers:** Use `--driver-mode=g++` for the `g++` wrapper while calling `clang_real`.
-
-## 📜 Philosophy
-Keep it **LEAN**. Prefer natively compiled `Bionic libc` (Android NDK) builds over standard `glibc` Linux binaries. Avoid PRoot or Termux environments whenever possible to maximize performance.
+- **Node.js:** Always export `HOME=/data/openclaw/home`.
+- **NPM/NPX:** Always hardcode `--prefix=/data/openclaw/npm-global --cache=/data/openclaw/home/.npm` in the execution line.
+- **Python:** Always export `PYTHONHOME=/data/local/yantra` and `PYTHONPATH=/data/local/yantra/lib/python3.13`. 

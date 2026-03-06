@@ -1,4 +1,5 @@
 #!/system/bin/sh
+export HOME=/data/openclaw/home
 export LD_LIBRARY_PATH=/data/local/yantra/lib:$LD_LIBRARY_PATH
 export PYTHONHOME=/data/local/yantra
 export PYTHONPATH=/data/local/yantra/lib/python3.13
